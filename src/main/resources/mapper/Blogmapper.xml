@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangyi.learn.dao.BlogDao">
+    <select id="findAllBlog" resultType="com.tangyi.learn.bean.Blog">
+        SELECT * FROM blog ORDER BY create_time DESC
+    </select>
+    <select id="findContentById" resultType="com.tangyi.learn.bean.Blog">
+        SELECT * FROM blog WHERE  id=#{id}
+    </select>
+    <select id="addBlog">
+        INSERT INTO blog
+            (user_id,title,img,introduction,content,create_time)
+            VALUE
+            (#{user_id},#{title},#{img},#{introduction},#{content},#{create_time})
+    </select>
+</mapper>

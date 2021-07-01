@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangyi.learn.dao.StudentDao">
+    <select id="getUserByMessage" resultType="com.tangyi.learn.bean.Student">
+       	SELECT * FROM student WHERE username=#{username} AND password=#{password}
+    </select>
+    <select id="getUserByName" resultType="com.tangyi.learn.bean.Student">
+       	SELECT * FROM student WHERE id=#{id}
+    </select>
+    <select id="getId" resultType="com.tangyi.learn.bean.Student">
+       	SELECT * FROM student WHERE username=#{username}
+    </select>
+    <select id="getAllUser" resultType="com.tangyi.learn.bean.Student">
+        SELECT * FROM student
+        <if test="username !=null ">
+            WHERE username like #{username}
+        </if>
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getUserCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM `student`
+        <if test="username !=null ">
+            WHERE username like #{username}
+        </if>
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO student
+        (username,password,myclass,role,state)
+        VALUE
+        (#{username},#{password},#{myclass},#{role},#{state})
+    </insert>
+
+    <delete id="deleteUser">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+</mapper>

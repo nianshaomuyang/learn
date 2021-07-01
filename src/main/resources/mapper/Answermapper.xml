@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tangyi.learn.dao.AnswerDao">
+    <select id="addAnswer">
+        INSERT INTO answer
+            (`index`,val,examid,studentid,state)
+            VALUE
+        (#{index},#{val},#{examid},#{studentid},#{state})
+    </select>
+
+    <select id="findQuById" resultType="com.tangyi.learn.bean.Question">
+        select * from choice_question where examCode=#{id}
+    </select>
+    <select id="findAnswer" resultType="java.util.HashMap">
+        SELECT
+            `index`,val
+        FROM
+            answer
+        WHERE
+            examid=#{examid} AND studentid=#{studentid}
+    </select>
+    <select id="findStudentByCourse" resultType="java.lang.String">
+        SELECT distinct studentid FROM answer WHERE  examid=#{examid}
+    </select>
+
+
+</mapper>
